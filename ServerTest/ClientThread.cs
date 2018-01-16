@@ -33,6 +33,10 @@ namespace ServerTest
             bool jatka = true;
             while (jatka)
             {
+                // Muuta ohjelmaa siten, että säie loppuu, jos asiakkaasta ei ole kuulunut
+                // 60 sekuntiin mitään
+                DateTime nyt = DateTime.Now;
+
                 if (ns.DataAvailable)
                 {
 
