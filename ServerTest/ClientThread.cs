@@ -35,7 +35,8 @@ namespace ServerTest
             {
                 // Muuta ohjelmaa siten, että säie loppuu, jos asiakkaasta ei ole kuulunut
                 // 60 sekuntiin mitään
-                DateTime nyt = DateTime.Now;
+                
+                DateTime viimeinenKomento = DateTime.Now;
 
                 if (ns.DataAvailable)
                 {
@@ -43,6 +44,8 @@ namespace ServerTest
                     // luetaan ja käsitellään komennot
 
                     string komento = sr.ReadLine();
+                    viimeinenKomento = DateTime.Now;
+
                     string vastaus = "";
                     // päivitetään aika
                     switch (komento)
@@ -61,9 +64,16 @@ namespace ServerTest
                     sw.WriteLine(vastaus);
                     Console.WriteLine(vastaus);
                 }
-                else
+                else // if (ns.DataAvailable)
                 {
-                    Thread.Sleep(500);
+                    // lopetetaan, jos viimeisestä komennosta on kulunut yli minuutti
+                    DateTime nyt = DateTime.Now;
+
+                    TimeSpan erotus = nyt - viimeinenKomento;
+                    if (erotus.TotalSeconds > 60)
+                        jatka = false;
+                    else
+                        Thread.Sleep(500);
                 }
             }
             // suljetaan yhteydet
