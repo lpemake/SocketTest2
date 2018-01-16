@@ -22,7 +22,7 @@ namespace ClientTest
 
             sw.AutoFlush = true;
 
-            /*
+            string vastaus = "";
             while (true)
             {
                 Console.WriteLine("Anna komento");
@@ -32,16 +32,16 @@ namespace ClientTest
                 sw.WriteLine(komento);
 
                 // odotetaan vastausta
-                string vastaus = sr.ReadLine();
+                vastaus = sr.ReadLine();
                 Console.WriteLine(vastaus);
                 if (komento == "QUIT")
                     break;
-            }*/
-
+            }
+            /*
             sw.WriteLine("TIME");
-            string vastaus = sr.ReadLine();
+            vastaus = sr.ReadLine();
             Console.WriteLine(vastaus);
-
+            */
             sw.Close();
             sr.Close();
             ns.Close();
